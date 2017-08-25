@@ -1,0 +1,850 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V1.43 build -156212558 
+                                                                                               Thu Aug 24 03:24:27 2017
+
+Microchip Technology Omniscient Code Generator v1.43 (Free mode) build 201707250354
+     1                           	processor	16F84A
+     2                           	opt	pw 120
+     3                           	opt	lm
+     4                           	psect	strings,global,class=STRING,delta=2
+     5                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     6                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+     7                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1
+     8                           	psect	maintext,global,class=CODE,split=1,delta=2
+     9                           	psect	text1,local,class=CODE,merge=1,delta=2
+    10                           	psect	text2,local,class=CODE,merge=1,delta=2,group=2
+    11                           	psect	text3,local,class=CODE,merge=1,delta=2,group=2
+    12                           	dabs	1,0x4E,2
+    13  0000                     
+    14                           ; Version 1.43
+    15                           ; Generated 25/07/2017 GMT
+    16                           ; 
+    17                           ; Copyright © 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    18                           ; All rights reserved.
+    19                           ; 
+    20                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    21                           ; 
+    22                           ; Redistribution and use in source and binary forms, with or without modification, are
+    23                           ; permitted provided that the following conditions are met:
+    24                           ; 
+    25                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    26                           ;        conditions and the following disclaimer.
+    27                           ; 
+    28                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    29                           ;        of conditions and the following disclaimer in the documentation and/or other
+    30                           ;        materials provided with the distribution.
+    31                           ; 
+    32                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    33                           ;        software without specific prior written permission.
+    34                           ; 
+    35                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    36                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    37                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    38                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    39                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    40                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    41                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    42                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    43                           ; 
+    44                           ; 
+    45                           ; Code-generator required, PIC16F84A Definitions
+    46                           ; 
+    47                           ; SFR Addresses
+    48  0000                     	;# 
+    49  0001                     	;# 
+    50  0002                     	;# 
+    51  0003                     	;# 
+    52  0004                     	;# 
+    53  0005                     	;# 
+    54  0006                     	;# 
+    55  0008                     	;# 
+    56  0009                     	;# 
+    57  000A                     	;# 
+    58  000B                     	;# 
+    59  0081                     	;# 
+    60  0085                     	;# 
+    61  0086                     	;# 
+    62  0088                     	;# 
+    63  0089                     	;# 
+    64                           
+    65                           	psect	strings
+    66  0001                     __pstrings:	
+    67  0001                     stringtab:	
+    68  0001                     __stringtab:	
+    69  0001                     stringcode:	
+    70                           ;	String table - string pointers are 1 byte each
+    71                           
+    72  0001                     stringdir:	
+    73  0001  3000               	movlw	high stringdir
+    74  0002  008A               	movwf	10
+    75  0003  0804               	movf	4,w
+    76  0004  0A84               	incf	4,f
+    77  0005  0782               	addwf	2,f
+    78  0006                     __stringbase:	
+    79  0006  3400               	retlw	0
+    80  0007                     __end_of__stringtab:	
+    81  0007                     _matrixLed:	
+    82  0007  3402               	retlw	2
+    83  0008  3406               	retlw	6
+    84  0009  340E               	retlw	14
+    85  000A  3401               	retlw	1
+    86  000B  3403               	retlw	3
+    87  000C  3407               	retlw	7
+    88  000D  340F               	retlw	15
+    89  000E  341F               	retlw	31
+    90  000F  343F               	retlw	63
+    91  0010                     __end_of_matrixLed:	
+    92  0010                     _FULL_CYCLES:	
+    93  0010  342D               	retlw	45
+    94  0011                     __end_of_FULL_CYCLES:	
+    95  0006                     _PORTB	set	6
+    96  0005                     _PORTA	set	5
+    97  0005                     _PORTAbits	set	5
+    98  0086                     _TRISB	set	134
+    99  0085                     _TRISA	set	133
+   100                           
+   101                           ; #config settings
+   102  0000                     
+   103                           	psect	cinit
+   104  03FE                     start_initialization:	
+   105  03FE                     __initialization:	
+   106  03FE                     end_of_initialization:	
+   107                           ;End of C runtime variable initialization code
+   108                           
+   109  03FE                     __end_of__initialization:	
+   110  03FE  0183               	clrf	3
+   111  03FF  2B7F               	ljmp	_main	;jump to C main() function
+   112                           
+   113                           	psect	cstackCOMMON
+   114  0000                     __pcstackCOMMON:	
+   115  0000                     ??_printToPorts:	
+   116  0000                     ??___wmul:	
+   117                           ; 1 bytes @ 0x0
+   118                           
+   119                           
+   120                           	psect	cstackBANK0
+   121  000C                     __pcstackBANK0:	
+   122                           ; 1 bytes @ 0x0
+   123                           
+   124  000C                     ?_printToPorts:	
+   125  000C                     ?_main:	
+   126                           ; 1 bytes @ 0x0
+   127                           
+   128  000C                     ?___wmul:	
+   129                           ; 1 bytes @ 0x0
+   130                           
+   131  000C                     printToPorts@index:	
+   132                           ; 2 bytes @ 0x0
+   133                           
+   134  000C                     ___wmul@multiplier:	
+   135                           ; 2 bytes @ 0x0
+   136                           
+   137                           
+   138                           ; 2 bytes @ 0x0
+   139  000C                     	ds	2
+   140  000E                     ___wmul@multiplicand:	
+   141                           
+   142                           ; 2 bytes @ 0x2
+   143  000E                     	ds	2
+   144  0010                     ___wmul@product:	
+   145                           
+   146                           ; 2 bytes @ 0x4
+   147  0010                     	ds	2
+   148  0012                     ?___lwdiv:	
+   149  0012                     ___lwdiv@divisor:	
+   150                           ; 2 bytes @ 0x6
+   151                           
+   152                           
+   153                           ; 2 bytes @ 0x6
+   154  0012                     	ds	2
+   155  0014                     ___lwdiv@dividend:	
+   156                           
+   157                           ; 2 bytes @ 0x8
+   158  0014                     	ds	2
+   159  0016                     ??___lwdiv:	
+   160                           
+   161                           ; 1 bytes @ 0xA
+   162  0016                     	ds	1
+   163  0017                     ___lwdiv@quotient:	
+   164                           
+   165                           ; 2 bytes @ 0xB
+   166  0017                     	ds	2
+   167  0019                     ___lwdiv@counter:	
+   168                           
+   169                           ; 1 bytes @ 0xD
+   170  0019                     	ds	1
+   171  001A                     ??_main:	
+   172                           
+   173                           ; 1 bytes @ 0xE
+   174  001A                     	ds	3
+   175  001D                     main@indexToShow:	
+   176                           
+   177                           ; 2 bytes @ 0x11
+   178  001D                     	ds	2
+   179  001F                     main@totalCycles:	
+   180                           
+   181                           ; 2 bytes @ 0x13
+   182  001F                     	ds	2
+   183  0021                     main@isLoading:	
+   184                           
+   185                           ; 1 bytes @ 0x15
+   186  0021                     	ds	1
+   187  0022                     main@counter:	
+   188                           
+   189                           ; 2 bytes @ 0x16
+   190  0022                     	ds	2
+   191  0024                     main@loadingCounter:	
+   192                           
+   193                           ; 2 bytes @ 0x18
+   194  0024                     	ds	2
+   195                           
+   196                           	psect	maintext
+   197  037F                     __pmaintext:	
+   198 ;;
+   199 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   200 ;;
+   201 ;; *************** function _main *****************
+   202 ;; Defined at:
+   203 ;;		line 33 in file "tank-controller.c"
+   204 ;; Parameters:    Size  Location     Type
+   205 ;;		None
+   206 ;; Auto vars:     Size  Location     Type
+   207 ;;  indexToShow     2   17[BANK0 ] int 
+   208 ;;  loadingCount    2   24[BANK0 ] unsigned int 
+   209 ;;  counter         2   22[BANK0 ] int 
+   210 ;;  totalCycles     2   19[BANK0 ] unsigned int 
+   211 ;;  isLoading       1   21[BANK0 ] unsigned char 
+   212 ;; Return value:  Size  Location     Type
+   213 ;;                  1    wreg      void 
+   214 ;; Registers used:
+   215 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   216 ;; Tracked objects:
+   217 ;;		On entry : B00/0
+   218 ;;		On exit  : 0/0
+   219 ;;		Unchanged: 0/0
+   220 ;; Data sizes:     COMMON   BANK0
+   221 ;;      Params:         0       0
+   222 ;;      Locals:         0       9
+   223 ;;      Temps:          0       3
+   224 ;;      Totals:         0      12
+   225 ;;Total ram usage:       12 bytes
+   226 ;; Hardware stack levels required when called:    2
+   227 ;; This function calls:
+   228 ;;		___lwdiv
+   229 ;;		___wmul
+   230 ;;		_printToPorts
+   231 ;; This function is called by:
+   232 ;;		Startup code after reset
+   233 ;; This function uses a non-reentrant model
+   234 ;;
+   235                           
+   236                           
+   237                           ;psect for function _main
+   238  037F                     _main:	
+   239                           
+   240                           ;tank-controller.c: 34: TRISA = 0b00000001;
+   241                           
+   242                           ;incstack = 0
+   243                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   244  037F  3001               	movlw	1
+   245  0380  1683               	bsf	3,5	;RP0=1, select bank1
+   246  0381  0085               	movwf	5	;volatile
+   247                           
+   248                           ;tank-controller.c: 35: TRISB = 0x00;
+   249  0382  0186               	clrf	6	;volatile
+   250                           
+   251                           ;tank-controller.c: 36: int counter = 0;
+   252  0383  1283               	bcf	3,5	;RP0=0, select bank0
+   253  0384  01A2               	clrf	main@counter
+   254  0385  01A3               	clrf	main@counter+1
+   255                           
+   256                           ;tank-controller.c: 37: unsigned char isLoading = 0;
+   257  0386  01A1               	clrf	main@isLoading
+   258                           
+   259                           ;tank-controller.c: 38: unsigned int loadingCounter = 0;
+   260  0387  01A4               	clrf	main@loadingCounter
+   261  0388  01A5               	clrf	main@loadingCounter+1
+   262                           
+   263                           ;tank-controller.c: 39: unsigned int totalCycles = 0;
+   264  0389  019F               	clrf	main@totalCycles
+   265  038A  01A0               	clrf	main@totalCycles+1
+   266  038B  2BB5               	goto	l674
+   267  038C                     l676:	
+   268                           
+   269                           ;tank-controller.c: 43: isLoading = 1;
+   270  038C  01A1               	clrf	main@isLoading
+   271  038D  0AA1               	incf	main@isLoading,f
+   272                           
+   273                           ;tank-controller.c: 44: counter = counter == 9 ? 0 : counter;
+   274  038E  3009               	movlw	9
+   275  038F  0622               	xorwf	main@counter,w
+   276  0390  0423               	iorwf	main@counter+1,w
+   277  0391  1D03               	btfss	3,2
+   278  0392  2B95               	goto	l684
+   279  0393  01A2               	clrf	main@counter
+   280  0394  01A3               	clrf	main@counter+1
+   281  0395                     l684:	
+   282                           
+   283                           ;tank-controller.c: 46: printToPorts(counter);
+   284  0395  0823               	movf	main@counter+1,w
+   285  0396  008D               	movwf	printToPorts@index+1
+   286  0397  0822               	movf	main@counter,w
+   287  0398  008C               	movwf	printToPorts@index
+   288  0399  2314               	fcall	_printToPorts
+   289                           
+   290                           ;tank-controller.c: 47: _delay((unsigned long)((500)*(4000000/4000.0)));
+   291  039A  3003               	movlw	3
+   292  039B  1283               	bcf	3,5	;RP0=0, select bank0
+   293  039C  009C               	movwf	??_main+2
+   294  039D  308A               	movlw	138
+   295  039E  009B               	movwf	??_main+1
+   296  039F  3055               	movlw	85
+   297  03A0  009A               	movwf	??_main
+   298  03A1                     u377:	
+   299  03A1  0B9A               	decfsz	??_main,f
+   300  03A2  2BA1               	goto	u377
+   301  03A3  0B9B               	decfsz	??_main+1,f
+   302  03A4  2BA1               	goto	u377
+   303  03A5  0B9C               	decfsz	??_main+2,f
+   304  03A6  2BA1               	goto	u377
+   305  03A7  2BA8               	nop2
+   306                           
+   307                           ;tank-controller.c: 49: counter++;
+   308  03A8  3001               	movlw	1
+   309  03A9  1283               	bcf	3,5	;RP0=0, select bank0
+   310  03AA  07A2               	addwf	main@counter,f
+   311  03AB  1803               	skipnc
+   312  03AC  0AA3               	incf	main@counter+1,f
+   313  03AD  3000               	movlw	0
+   314  03AE  07A3               	addwf	main@counter+1,f
+   315                           
+   316                           ;tank-controller.c: 50: loadingCounter++;
+   317  03AF  3001               	movlw	1
+   318  03B0  07A4               	addwf	main@loadingCounter,f
+   319  03B1  1803               	skipnc
+   320  03B2  0AA5               	incf	main@loadingCounter+1,f
+   321  03B3  3000               	movlw	0
+   322  03B4  07A5               	addwf	main@loadingCounter+1,f
+   323  03B5                     l674:	
+   324                           ;tank-controller.c: 41: while(1) {
+   325                           
+   326                           ;tank-controller.c: 51: } else {
+   327                           
+   328                           
+   329                           ;tank-controller.c: 42: if (PORTAbits.RA0 == 1) {
+   330  03B5  1805               	btfsc	5,0	;volatile
+   331  03B6  2B8C               	goto	l676
+   332                           
+   333                           ;tank-controller.c: 52: if (isLoading == 1) {
+   334  03B7  0321               	decf	main@isLoading,w
+   335  03B8  1D03               	btfss	3,2
+   336  03B9  2BC3               	goto	l700
+   337                           
+   338                           ;tank-controller.c: 53: PORTA = 0xff;
+   339  03BA  30FF               	movlw	255
+   340  03BB  0085               	movwf	5	;volatile
+   341                           
+   342                           ;tank-controller.c: 54: PORTB = 0xff;
+   343  03BC  30FF               	movlw	255
+   344  03BD  0086               	movwf	6	;volatile
+   345                           
+   346                           ;tank-controller.c: 55: isLoading = 0;
+   347  03BE  01A1               	clrf	main@isLoading
+   348                           
+   349                           ;tank-controller.c: 56: totalCycles = loadingCounter;
+   350  03BF  0825               	movf	main@loadingCounter+1,w
+   351  03C0  00A0               	movwf	main@totalCycles+1
+   352  03C1  0824               	movf	main@loadingCounter,w
+   353  03C2  009F               	movwf	main@totalCycles
+   354  03C3                     l700:	
+   355                           
+   356                           ;tank-controller.c: 57: }
+   357                           ;tank-controller.c: 59: if (loadingCounter > 0) {
+   358  03C3  0824               	movf	main@loadingCounter,w
+   359  03C4  0425               	iorwf	main@loadingCounter+1,w
+   360  03C5  1903               	btfsc	3,2
+   361  03C6  2BB5               	goto	l674
+   362                           
+   363                           ;tank-controller.c: 60: int indexToShow = (loadingCounter * 9) / totalCycles;
+   364  03C7  0820               	movf	main@totalCycles+1,w
+   365  03C8  0093               	movwf	___lwdiv@divisor+1
+   366  03C9  081F               	movf	main@totalCycles,w
+   367  03CA  0092               	movwf	___lwdiv@divisor
+   368  03CB  0825               	movf	main@loadingCounter+1,w
+   369  03CC  008D               	movwf	___wmul@multiplier+1
+   370  03CD  0824               	movf	main@loadingCounter,w
+   371  03CE  008C               	movwf	___wmul@multiplier
+   372  03CF  3009               	movlw	9
+   373  03D0  008E               	movwf	___wmul@multiplicand
+   374  03D1  3000               	movlw	0
+   375  03D2  008F               	movwf	___wmul@multiplicand+1
+   376  03D3  22F2               	fcall	___wmul
+   377  03D4  1283               	bcf	3,5	;RP0=0, select bank0
+   378  03D5  080D               	movf	?___wmul+1,w
+   379  03D6  0095               	movwf	___lwdiv@dividend+1
+   380  03D7  080C               	movf	?___wmul,w
+   381  03D8  0094               	movwf	___lwdiv@dividend
+   382  03D9  2342               	fcall	___lwdiv
+   383  03DA  1283               	bcf	3,5	;RP0=0, select bank0
+   384  03DB  0813               	movf	?___lwdiv+1,w
+   385  03DC  009E               	movwf	main@indexToShow+1
+   386  03DD  0812               	movf	?___lwdiv,w
+   387  03DE  009D               	movwf	main@indexToShow
+   388                           
+   389                           ;tank-controller.c: 61: printToPorts(indexToShow - 1);
+   390  03DF  081D               	movf	main@indexToShow,w
+   391  03E0  3EFF               	addlw	255
+   392  03E1  008C               	movwf	printToPorts@index
+   393  03E2  081E               	movf	main@indexToShow+1,w
+   394  03E3  1803               	skipnc
+   395  03E4  3E01               	addlw	1
+   396  03E5  3EFF               	addlw	255
+   397  03E6  008D               	movwf	printToPorts@index+1
+   398  03E7  2314               	fcall	_printToPorts
+   399                           
+   400                           ;tank-controller.c: 62: _delay((unsigned long)((500)*(4000000/4000.0)));
+   401  03E8  3003               	movlw	3
+   402  03E9  1283               	bcf	3,5	;RP0=0, select bank0
+   403  03EA  009C               	movwf	??_main+2
+   404  03EB  308A               	movlw	138
+   405  03EC  009B               	movwf	??_main+1
+   406  03ED  3055               	movlw	85
+   407  03EE  009A               	movwf	??_main
+   408  03EF                     u387:	
+   409  03EF  0B9A               	decfsz	??_main,f
+   410  03F0  2BEF               	goto	u387
+   411  03F1  0B9B               	decfsz	??_main+1,f
+   412  03F2  2BEF               	goto	u387
+   413  03F3  0B9C               	decfsz	??_main+2,f
+   414  03F4  2BEF               	goto	u387
+   415  03F5  2BF6               	nop2
+   416                           
+   417                           ;tank-controller.c: 63: loadingCounter--;
+   418  03F6  3001               	movlw	1
+   419  03F7  1283               	bcf	3,5	;RP0=0, select bank0
+   420  03F8  02A4               	subwf	main@loadingCounter,f
+   421  03F9  3000               	movlw	0
+   422  03FA  1C03               	skipc
+   423  03FB  03A5               	decf	main@loadingCounter+1,f
+   424  03FC  02A5               	subwf	main@loadingCounter+1,f
+   425  03FD  2BB5               	goto	l674
+   426  03FE                     __end_of_main:	
+   427                           
+   428                           	psect	text1
+   429  0314                     __ptext1:	
+   430 ;; *************** function _printToPorts *****************
+   431 ;; Defined at:
+   432 ;;		line 69 in file "tank-controller.c"
+   433 ;; Parameters:    Size  Location     Type
+   434 ;;  index           2    0[BANK0 ] int 
+   435 ;; Auto vars:     Size  Location     Type
+   436 ;;		None
+   437 ;; Return value:  Size  Location     Type
+   438 ;;                  1    wreg      void 
+   439 ;; Registers used:
+   440 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath
+   441 ;; Tracked objects:
+   442 ;;		On entry : 0/0
+   443 ;;		On exit  : 0/0
+   444 ;;		Unchanged: 0/0
+   445 ;; Data sizes:     COMMON   BANK0
+   446 ;;      Params:         0       2
+   447 ;;      Locals:         0       0
+   448 ;;      Temps:          0       0
+   449 ;;      Totals:         0       2
+   450 ;;Total ram usage:        2 bytes
+   451 ;; Hardware stack levels used:    2
+   452 ;; This function calls:
+   453 ;;		Nothing
+   454 ;; This function is called by:
+   455 ;;		_main
+   456 ;; This function uses a non-reentrant model
+   457 ;;
+   458                           
+   459                           
+   460                           ;psect for function _printToPorts
+   461  0314                     _printToPorts:	
+   462                           
+   463                           ;tank-controller.c: 70: if (index < 0) {
+   464                           
+   465                           ;incstack = 0
+   466                           ; Regs used in _printToPorts: [wreg-fsr0h+status,2+status,0+btemp+1+pclath]
+   467  0314  1283               	bcf	3,5	;RP0=0, select bank0
+   468  0315  1F8D               	btfss	printToPorts@index+1,7
+   469  0316  2B1A               	goto	l610
+   470                           
+   471                           ;tank-controller.c: 71: PORTA = 0x00;
+   472  0317  0185               	clrf	5	;volatile
+   473                           
+   474                           ;tank-controller.c: 72: PORTB = 0x00;
+   475  0318  0186               	clrf	6	;volatile
+   476                           
+   477                           ;tank-controller.c: 73: } else if (index < 3) {
+   478  0319  0008               	return
+   479  031A                     l610:	
+   480  031A  080D               	movf	printToPorts@index+1,w
+   481  031B  3A80               	xorlw	128
+   482  031C  00CF               	movwf	79
+   483  031D  3080               	movlw	128
+   484  031E  024F               	subwf	79,w
+   485  031F  1D03               	skipz
+   486  0320  2B23               	goto	u205
+   487  0321  3003               	movlw	3
+   488  0322  020C               	subwf	printToPorts@index,w
+   489  0323                     u205:	
+   490  0323  1803               	skipnc
+   491  0324  2B2D               	goto	l616
+   492                           
+   493                           ;tank-controller.c: 74: PORTA = matrixLed[index];
+   494  0325  1283               	bcf	3,5	;RP0=0, select bank0
+   495  0326  080C               	movf	printToPorts@index,w
+   496  0327  3E01               	addlw	low ((_matrixLed-__stringbase)| (0+32768))
+   497  0328  0084               	movwf	4
+   498  0329  2001               	fcall	stringdir
+   499  032A  0085               	movwf	5	;volatile
+   500                           
+   501                           ;tank-controller.c: 75: PORTB = 0x00;
+   502  032B  0186               	clrf	6	;volatile
+   503                           
+   504                           ;tank-controller.c: 76: } else if (index < 9) {
+   505  032C  0008               	return
+   506  032D                     l616:	
+   507  032D  1283               	bcf	3,5	;RP0=0, select bank0
+   508  032E  080D               	movf	printToPorts@index+1,w
+   509  032F  3A80               	xorlw	128
+   510  0330  00CF               	movwf	79
+   511  0331  3080               	movlw	128
+   512  0332  024F               	subwf	79,w
+   513  0333  1D03               	skipz
+   514  0334  2B37               	goto	u215
+   515  0335  3009               	movlw	9
+   516  0336  020C               	subwf	printToPorts@index,w
+   517  0337                     u215:	
+   518  0337  1803               	skipnc
+   519  0338  0008               	return
+   520                           
+   521                           ;tank-controller.c: 77: PORTA = 0x0e;
+   522  0339  300E               	movlw	14
+   523  033A  1283               	bcf	3,5	;RP0=0, select bank0
+   524  033B  0085               	movwf	5	;volatile
+   525                           
+   526                           ;tank-controller.c: 78: PORTB = matrixLed[index];
+   527  033C  080C               	movf	printToPorts@index,w
+   528  033D  3E01               	addlw	low ((_matrixLed-__stringbase)| (0+32768))
+   529  033E  0084               	movwf	4
+   530  033F  2001               	fcall	stringdir
+   531  0340  0086               	movwf	6	;volatile
+   532  0341  0008               	return
+   533  0342                     __end_of_printToPorts:	
+   534                           
+   535                           	psect	text2
+   536  02F2                     __ptext2:	
+   537 ;; *************** function ___wmul *****************
+   538 ;; Defined at:
+   539 ;;		line 15 in file "/opt/microchip/xc8/v1.43/sources/common/Umul16.c"
+   540 ;; Parameters:    Size  Location     Type
+   541 ;;  multiplier      2    0[BANK0 ] unsigned int 
+   542 ;;  multiplicand    2    2[BANK0 ] unsigned int 
+   543 ;; Auto vars:     Size  Location     Type
+   544 ;;  product         2    4[BANK0 ] unsigned int 
+   545 ;; Return value:  Size  Location     Type
+   546 ;;                  2    0[BANK0 ] unsigned int 
+   547 ;; Registers used:
+   548 ;;		wreg, status,2, status,0
+   549 ;; Tracked objects:
+   550 ;;		On entry : 0/0
+   551 ;;		On exit  : 0/0
+   552 ;;		Unchanged: 0/0
+   553 ;; Data sizes:     COMMON   BANK0
+   554 ;;      Params:         0       4
+   555 ;;      Locals:         0       2
+   556 ;;      Temps:          0       0
+   557 ;;      Totals:         0       6
+   558 ;;Total ram usage:        6 bytes
+   559 ;; Hardware stack levels used:    1
+   560 ;; This function calls:
+   561 ;;		Nothing
+   562 ;; This function is called by:
+   563 ;;		_main
+   564 ;; This function uses a non-reentrant model
+   565 ;;
+   566                           
+   567                           
+   568                           ;psect for function ___wmul
+   569  02F2                     ___wmul:	
+   570                           
+   571                           ;incstack = 0
+   572                           ; Regs used in ___wmul: [wreg+status,2+status,0]
+   573  02F2  1283               	bcf	3,5	;RP0=0, select bank0
+   574  02F3  0190               	clrf	___wmul@product
+   575  02F4  0191               	clrf	___wmul@product+1
+   576  02F5                     l624:	
+   577  02F5  1C0C               	btfss	___wmul@multiplier,0
+   578  02F6  2AFD               	goto	l126
+   579  02F7  080E               	movf	___wmul@multiplicand,w
+   580  02F8  0790               	addwf	___wmul@product,f
+   581  02F9  1803               	skipnc
+   582  02FA  0A91               	incf	___wmul@product+1,f
+   583  02FB  080F               	movf	___wmul@multiplicand+1,w
+   584  02FC  0791               	addwf	___wmul@product+1,f
+   585  02FD                     l126:	
+   586  02FD  3001               	movlw	1
+   587  02FE                     u235:	
+   588  02FE  1003               	clrc
+   589  02FF  0D8E               	rlf	___wmul@multiplicand,f
+   590  0300  0D8F               	rlf	___wmul@multiplicand+1,f
+   591  0301  3EFF               	addlw	-1
+   592  0302  1D03               	skipz
+   593  0303  2AFE               	goto	u235
+   594  0304  3001               	movlw	1
+   595  0305                     u245:	
+   596  0305  1003               	clrc
+   597  0306  0C8D               	rrf	___wmul@multiplier+1,f
+   598  0307  0C8C               	rrf	___wmul@multiplier,f
+   599  0308  3EFF               	addlw	-1
+   600  0309  1D03               	skipz
+   601  030A  2B05               	goto	u245
+   602  030B  080C               	movf	___wmul@multiplier,w
+   603  030C  040D               	iorwf	___wmul@multiplier+1,w
+   604  030D  1D03               	btfss	3,2
+   605  030E  2AF5               	goto	l624
+   606  030F  0811               	movf	___wmul@product+1,w
+   607  0310  008D               	movwf	?___wmul+1
+   608  0311  0810               	movf	___wmul@product,w
+   609  0312  008C               	movwf	?___wmul
+   610  0313  0008               	return
+   611  0314                     __end_of___wmul:	
+   612                           
+   613                           	psect	text3
+   614  0342                     __ptext3:	
+   615 ;; *************** function ___lwdiv *****************
+   616 ;; Defined at:
+   617 ;;		line 6 in file "/opt/microchip/xc8/v1.43/sources/common/lwdiv.c"
+   618 ;; Parameters:    Size  Location     Type
+   619 ;;  divisor         2    6[BANK0 ] unsigned int 
+   620 ;;  dividend        2    8[BANK0 ] unsigned int 
+   621 ;; Auto vars:     Size  Location     Type
+   622 ;;  quotient        2   11[BANK0 ] unsigned int 
+   623 ;;  counter         1   13[BANK0 ] unsigned char 
+   624 ;; Return value:  Size  Location     Type
+   625 ;;                  2    6[BANK0 ] unsigned int 
+   626 ;; Registers used:
+   627 ;;		wreg, status,2, status,0
+   628 ;; Tracked objects:
+   629 ;;		On entry : 0/0
+   630 ;;		On exit  : 0/0
+   631 ;;		Unchanged: 0/0
+   632 ;; Data sizes:     COMMON   BANK0
+   633 ;;      Params:         0       4
+   634 ;;      Locals:         0       3
+   635 ;;      Temps:          0       1
+   636 ;;      Totals:         0       8
+   637 ;;Total ram usage:        8 bytes
+   638 ;; Hardware stack levels used:    1
+   639 ;; This function calls:
+   640 ;;		Nothing
+   641 ;; This function is called by:
+   642 ;;		_main
+   643 ;; This function uses a non-reentrant model
+   644 ;;
+   645                           
+   646                           
+   647                           ;psect for function ___lwdiv
+   648  0342                     ___lwdiv:	
+   649                           
+   650                           ;incstack = 0
+   651                           ; Regs used in ___lwdiv: [wreg+status,2+status,0]
+   652  0342  1283               	bcf	3,5	;RP0=0, select bank0
+   653  0343  0197               	clrf	___lwdiv@quotient
+   654  0344  0198               	clrf	___lwdiv@quotient+1
+   655  0345  0812               	movf	___lwdiv@divisor,w
+   656  0346  0413               	iorwf	___lwdiv@divisor+1,w
+   657  0347  1903               	btfsc	3,2
+   658  0348  2B7A               	goto	l658
+   659  0349  0199               	clrf	___lwdiv@counter
+   660  034A  0A99               	incf	___lwdiv@counter,f
+   661  034B                     l646:	
+   662  034B  1B93               	btfsc	___lwdiv@divisor+1,7
+   663  034C  2B59               	goto	l648
+   664  034D  3001               	movlw	1
+   665  034E                     u275:	
+   666  034E  1003               	clrc
+   667  034F  0D92               	rlf	___lwdiv@divisor,f
+   668  0350  0D93               	rlf	___lwdiv@divisor+1,f
+   669  0351  3EFF               	addlw	-1
+   670  0352  1D03               	skipz
+   671  0353  2B4E               	goto	u275
+   672  0354  3001               	movlw	1
+   673  0355  0096               	movwf	??___lwdiv
+   674  0356  0816               	movf	??___lwdiv,w
+   675  0357  0799               	addwf	___lwdiv@counter,f
+   676  0358  2B4B               	goto	l646
+   677  0359                     l648:	
+   678  0359  3001               	movlw	1
+   679  035A                     u295:	
+   680  035A  1003               	clrc
+   681  035B  0D97               	rlf	___lwdiv@quotient,f
+   682  035C  0D98               	rlf	___lwdiv@quotient+1,f
+   683  035D  3EFF               	addlw	-1
+   684  035E  1D03               	skipz
+   685  035F  2B5A               	goto	u295
+   686  0360  0813               	movf	___lwdiv@divisor+1,w
+   687  0361  0215               	subwf	___lwdiv@dividend+1,w
+   688  0362  1D03               	skipz
+   689  0363  2B66               	goto	u305
+   690  0364  0812               	movf	___lwdiv@divisor,w
+   691  0365  0214               	subwf	___lwdiv@dividend,w
+   692  0366                     u305:	
+   693  0366  1C03               	skipc
+   694  0367  2B6F               	goto	l654
+   695  0368  0812               	movf	___lwdiv@divisor,w
+   696  0369  0294               	subwf	___lwdiv@dividend,f
+   697  036A  0813               	movf	___lwdiv@divisor+1,w
+   698  036B  1C03               	skipc
+   699  036C  0395               	decf	___lwdiv@dividend+1,f
+   700  036D  0295               	subwf	___lwdiv@dividend+1,f
+   701  036E  1417               	bsf	___lwdiv@quotient,0
+   702  036F                     l654:	
+   703  036F  3001               	movlw	1
+   704  0370                     u315:	
+   705  0370  1003               	clrc
+   706  0371  0C93               	rrf	___lwdiv@divisor+1,f
+   707  0372  0C92               	rrf	___lwdiv@divisor,f
+   708  0373  3EFF               	addlw	-1
+   709  0374  1D03               	skipz
+   710  0375  2B70               	goto	u315
+   711  0376  3001               	movlw	1
+   712  0377  0299               	subwf	___lwdiv@counter,f
+   713  0378  1D03               	btfss	3,2
+   714  0379  2B59               	goto	l648
+   715  037A                     l658:	
+   716  037A  0818               	movf	___lwdiv@quotient+1,w
+   717  037B  0093               	movwf	?___lwdiv+1
+   718  037C  0817               	movf	___lwdiv@quotient,w
+   719  037D  0092               	movwf	?___lwdiv
+   720  037E  0008               	return
+   721  037F                     __end_of___lwdiv:	
+   722  004E                     btemp	set	78	;btemp
+   723  004E                     wtemp0	set	78
+
+
+Data Sizes:
+    Strings     0
+    Constant    10
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            66     26      26
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->___lwdiv
+    ___lwdiv->___wmul
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                12    12      0     870
+                                             14 BANK0     12    12      0
+                            ___lwdiv
+                             ___wmul
+                       _printToPorts
+ ---------------------------------------------------------------------------------
+ (2) _printToPorts                                         2     0      2     216
+                                              0 BANK0      2     0      2
+ ---------------------------------------------------------------------------------
+ (1) ___wmul                                               6     2      4     198
+                                              0 BANK0      6     2      4
+ ---------------------------------------------------------------------------------
+ (1) ___lwdiv                                              8     4      4     268
+                                              6 BANK0      8     4      4
+                             ___wmul (ARG)
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   ___lwdiv
+     ___wmul (ARG)
+   ___wmul
+   _printToPorts
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMMON            0      0       0       0        0.0%
+EEDATA              40      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+STACK                0      0       0       2        0.0%
+BANK0               42     1A      1A       3       39.4%
+ABS                  0      0       0       4        0.0%
+BITBANK0            42      0       0       5        0.0%
+DATA                 0      0       0       6        0.0%
+
+
+Microchip Technology PIC Macro Assembler V1.43 build -156212558 
+Symbol Table                                                                                   Thu Aug 24 03:24:27 2017
+
+                      pc 0002              __CFG_CP$OFF 0000                       fsr 0004  
+    ___wmul@multiplicand 000E                      l126 02FD                      l610 031A  
+                    l700 03C3                      l624 02F5                      l616 032D  
+                    l654 036F                      l646 034B                      l648 0359  
+                    l658 037A                      l674 03B5                      l684 0395  
+                    l676 038C                      u205 0323                      u215 0337  
+                    u305 0366                      u315 0370                      u235 02FE  
+                    u245 0305                      u275 034E                      u295 035A  
+                    u377 03A1                      u387 03EF                      fsr0 0004  
+           __CFG_FOSC$XT 0000              main@counter 0022                     _main 037F  
+                   btemp 004E                     start 0000       main@loadingCounter 0024  
+                  ?_main 000C            __CFG_WDTE$OFF 0000          __end_of___lwdiv 037F  
+                  _PORTA 0005                    _PORTB 0006                    _TRISA 0085  
+                  _TRISB 0086            __CFG_PWRTE$ON 0000                    pclath 000A  
+                  status 0003                    wtemp0 004E          __initialization 03FE  
+           __end_of_main 03FE                   ??_main 001A            main@isLoading 0021  
+                 ___wmul 02F2                ??___lwdiv 0016        printToPorts@index 000C  
+__end_of__initialization 03FE           __pcstackCOMMON 0000               __pmaintext 037F  
+                ?___wmul 000C               __stringtab 0001          __size_of___wmul 0022  
+                ___lwdiv 0342                  __ptext1 0314                  __ptext2 02F2  
+                __ptext3 0342        __end_of_matrixLed 0010     end_of_initialization 03FE  
+          ?_printToPorts 000C                _PORTAbits 0005           __end_of___wmul 0314  
+         ??_printToPorts 0000      start_initialization 03FE                 ??___wmul 0000  
+              ___latbits 0000            __pcstackBANK0 000C      __end_of_FULL_CYCLES 0011  
+       ___lwdiv@dividend 0014                 ?___lwdiv 0012                __pstrings 0001  
+       ___lwdiv@quotient 0017                _matrixLed 0007     __end_of_printToPorts 0342  
+         ___wmul@product 0010          main@indexToShow 001D              __stringbase 0006  
+      ___wmul@multiplier 000C              _FULL_CYCLES 0010         __size_of___lwdiv 003D  
+     __end_of__stringtab 0007          ___lwdiv@divisor 0012          ___lwdiv@counter 0019  
+          __size_of_main 007F    __size_of_printToPorts 002E                stringcode 0001  
+           _printToPorts 0314          main@totalCycles 001F                 stringdir 0001  
+               stringtab 0001  
